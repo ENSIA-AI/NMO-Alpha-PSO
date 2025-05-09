@@ -64,7 +64,7 @@ The accuracy improved rapidly in the early iterations, and after reaching a plat
 ### Feature Selection Frequency
 The distribution of feature selections across particles showed that PSO efficiently explored the feature space without favoring any particular feature excessively.
 
-![Feature Selection Frequency](feature_selection_frequency.png)
+![Feature Selection Frequency](/latex_src/feature_selection_frequency.png)
 
 ### Comparison of Accuracy with Different Swarm Sizes and Iteration Counts
 
