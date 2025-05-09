@@ -98,7 +98,7 @@ Particle Swarm Optimization (PSO) is a computational method designed to optimize
 
 This paradigm was initially introduced by James Kennedy and Russel Ebhart in 1995\cite{pereira2011pso}, it is inspired by \textit{Swarm Intelligence} which is a social behavioral pattern known in many animals that live in cooperative societies particularly fish and birds flocking \cite{ChengS2018swarm}.
 
-The algorithm can be thought of as an analogy to birds flocking in the following manner, a bird flock (swarm of particles consituting a set of states) travels around its habitat (the problem state space) using group and individual learning looking for a place for them to settle down in which shelters them and provides them with food ..., the latter can be abstracted to the notion of a \textit{fitness function} which the algorithm optimizes \cite{sengupta2018}.
+The algorithm can be thought of as an analogy to birds flocking in the following manner, a bird flock (swarm of particles constituting a set of states) travels around its habitat (the problem state space) using group and individual learning looking for a place for them to settle down in which shelters them and provides them with food ..., the latter can be abstracted to the notion of a \textit{fitness function} which the algorithm optimizes \cite{sengupta2018}.
 
 \subsection{Binary PSO}
 
@@ -148,7 +148,7 @@ In BPSO, the position of each particle is represented by a binary vector, and th
 \end{itemize}
 \textit{Why Python ?} Python allows for faster implementations and testing of ideas due to its high level nature, abstracting significant boilerplate code and memory management that would otherwise be accounted for in many other technologies like C++ or MATLAB. 
 
-Futhermore, has a flourishing ecosystem of libraries for computation and machine learning in general. And through tools like Cython, Python code can be compiled into C++/C to offload high-performance components, leaving the focus on algorithm design, evaluation and visualization rather than technology dependent optimization tweaks.
+Furthermore, has a flourishing ecosystem of libraries for computation and machine learning in general. And through tools like Cython, Python code can be compiled into C++/C to offload high-performance components, leaving the focus on algorithm design, evaluation and visualization rather than technology dependent optimization tweaks.
 
 
 \subsection{Fitness Function \& BPSO}
@@ -163,7 +163,7 @@ Futhermore, has a flourishing ecosystem of libraries for computation and machine
 
 \subsection{Classifier Used}
 \begin{itemize}
-    \item Random Forest with 10 estimators each using \textit{gini} index for loss.
+    \item Random Forest with 10 estimators each using the \textit{Gini} impurity as the splitting criterion.
 \end{itemize}
 \newpage
 % ==================
@@ -197,7 +197,7 @@ The convergence curve shows how the accuracy of the classifier evolved over the 
 
 The \textbf{convergence curve} (Figure \ref{fig:convergence}) shows rapid improvements in accuracy during the initial iterations, indicating that the swarm was effectively exploring the feature space. The accuracy then stabilizes after iteration 28, which suggests that the optimization process has found a near-optimal subset of features. Early stopping was triggered after 45 iterations, signaling that further exploration would not yield significant improvements.
 
-\subsection{Feature Selection Frequency}
+\subsection{Interpretation of Feature Selection Frequencies}
 
 We also analyzed the frequency with which individual features were selected across the particles in the swarm. This is visualized in the following bar chart:
 
@@ -232,7 +232,7 @@ The table below shows the performance of the PSO algorithm with varying swarm si
 \end{tabular}
 \end{table}
 
-The \textbf{accuracy comparison table} (Table \ref{tab:accuracy_comparison}) demonstrates that increasing both the swarm size and the number of iterations leads to higher classification accuracy. The highest accuracy (1.0000) was achieved when the swarm size was 50 or 100, and the number of iterations was set to 50 or 100. This shows that larger swarm sizes enhance the exploration capabilities, while more iterations improve convergence towards the optimal solution which comes at the expense of having a very long running time but we can also see that our configuration gives the .
+The \textbf{accuracy comparison table} (Table \ref{tab:accuracy_comparison}) demonstrates that increasing both the swarm size and the number of iterations leads to higher classification accuracy. The highest accuracy (1.0000) was achieved when the swarm size was 50 or 100, and the number of iterations was set to 50 or 100. This shows that larger swarm sizes enhance the exploration capabilities, while more iterations improve convergence towards the optimal solution which comes at the expense of having a very long running time but we can also see that our chosen configuration (50 iterations, 30 particles) achieves a good trade-off between accuracy and runtime.
 
 \subsection{Optimization Time and Efficiency}
 
@@ -254,7 +254,7 @@ By restructuring the results and analysis section with comments on each figure a
 
 % ==================
 \section{Challenges}
-\textbf{Sub-optimal Convergence} : BPSO is prone to converging too quickly to local optima and the search space is saturated with plateaus occurring in a huge variety of subsets which makes convergences to true optima less and less likely.
+\textbf{Sub-optimal Convergence} : BPSO is prone to converging too quickly to local optima and the search space is saturated with plateaus occurring in a huge variety of subsets which makes convergence to the global optimum less and less likely.
 
 \textbf{Computational Time} : In a world where decisions are taken in split seconds, the algorithm running time is impacted by the major time consuming factor in the optimization pipeline which is evaluating the fitness function, so better implementations which could support parallelism should be considered.
 
@@ -288,7 +288,7 @@ swarm[i][j] = 1 if random.random() < sigmoid(velocities[i][j]) else 0
 \subsection*{Code Snippet: Minimization Objective Function}
 \begin{lstlisting}[language=Python, basicstyle=\ttfamily\small]
 acc = accuracy_score(y_test, predictions)
-penalty = 0.001 * curr_features / all_features * (curr_features > 17)
+penalty = 0.01 * curr_features / all_features * (curr_features > 20)
 score = 1 - acc + penalty
 \end{lstlisting}
 
